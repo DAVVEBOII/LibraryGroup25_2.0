@@ -1,9 +1,4 @@
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Scanner;
 
 public class Main {
@@ -12,17 +7,30 @@ public class Main {
     public static void main(String[] args) {
         Connection conn = null;
         Statement stmt = null;
+        CallableStatement callableStatement = null;
         ResultSet rs = null;
 
-        String findUser = "{CALL spFindTheUser(?)}";
+        String findUser = "{ CALL spFindUser(?)}";
         String userFromDB = null;
-        String findPasswordMatch = "{ Call spFindPasswordMatch(?,?)}";
+        String findPasswordMatch = "{ CALL spFindUserPassword(?,?)}";
         String pwdFromDB = null;
+
         try {
             //establish connection with DB
             conn = DriverManager.getConnection(DATABASE_URL, "libraryuser", "abcd1234");
         } catch (SQLException sqlException) {
             System.out.println("David sämst");
+        }
+
+        Scanner input1 = new Scanner(System.in);
+        String usernameInput = input1.nextLine();
+        rs = callableStatement.executeQuery();
+
+        try {
+            callableStatement = conn.prepareCall(findUser);
+            callableStatement.setString(1, usernameInput);
+
+            while (resultSet.next())
         }
     }
 }
