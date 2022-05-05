@@ -23,7 +23,11 @@ public class Main {
         }
 
         //massa prints//
+        System.out.println("Welcome to LTU Library");
+        System.out.println();
 
+        System.out.println("");
+        System.out.println("");
         Scanner input1 = new Scanner(System.in);
         String usernameInput = input1.nextLine();
 
@@ -33,11 +37,27 @@ public class Main {
             rs = callableStatement.executeQuery();
 
             while (rs.next()) {
-
-        catch(SQLException throwables){
-                    throwables.printStackTrace();
-                }
+                userFromDB = rs.getString("username");
             }
-        }
-    }
-}
+            if (usernameInput.equals(userFromDB)) {
+                System.out.println("User found");
+            } else {
+                System.out.println("User not found");
+            } //end while
+        } //end try
+        catch (SQLException sqlException){
+            sqlException.printStackTrace();
+        } //end catch
+        finally //ensure resultSet, statement and connection are closed
+        {
+            try {
+                rs.close();
+                stmt.close();
+                conn.close();
+            } //end try
+            catch ( SQLException sqlException){
+            sqlException.printStackTrace();
+        }//end catch
+        }//end finally
+    }//end main
+}//end class
