@@ -7,27 +7,26 @@ public class Main {
     public static void main(String[] args) {
         Connection conn = null;
         Statement stmt = null;
-        CallableStatement callableStatement = null;
+        CallableStatement callableStatement;
         ResultSet rs = null;
 
         String findUser = "{ CALL spFindUser(?)}";
         String userFromDB = null;
-        String findPasswordMatch = "{ CALL spFindUserPassword(?,?)}";
-        String pwdFromDB = null;
+
 
         try {
             //establish connection with DB
             conn = DriverManager.getConnection(DATABASE_URL, "libraryuser", "abcd1234");
         } catch (SQLException sqlException) {
-            System.out.println("David sämst");
+            System.out.println("Database user does not exist");
         }
 
-        //massa prints//
+        //massa prints
         System.out.println("Welcome to LTU Library");
         System.out.println();
 
-        System.out.println("");
-        System.out.println("");
+        System.out.println("Please login");
+        System.out.println("Username");
         Scanner input1 = new Scanner(System.in);
         String usernameInput = input1.nextLine();
 
@@ -51,9 +50,9 @@ public class Main {
         finally //ensure resultSet, statement and connection are closed
         {
             try {
-                rs.close();
-                stmt.close();
-                conn.close();
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
             } //end try
             catch ( SQLException sqlException){
             sqlException.printStackTrace();
