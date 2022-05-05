@@ -22,15 +22,22 @@ public class Main {
             System.out.println("David sämst");
         }
 
+        //massa prints//
+
         Scanner input1 = new Scanner(System.in);
         String usernameInput = input1.nextLine();
-        rs = callableStatement.executeQuery();
 
         try {
             callableStatement = conn.prepareCall(findUser);
             callableStatement.setString(1, usernameInput);
+            rs = callableStatement.executeQuery();
 
-            while (resultSet.next())
+            while (rs.next()) {
+
+        catch(SQLException throwables){
+                    throwables.printStackTrace();
+                }
+            }
         }
     }
 }
