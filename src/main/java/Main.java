@@ -11,13 +11,13 @@ public class Main {
         con = ConnectionMYDB.getConnection();
         stmt = con.createStatement();
 
-
         //massa prints
         System.out.println("Welcome to LTU Library");
         System.out.println();
 
         System.out.println("Please login");
         System.out.println("Username");
+
         Scanner input1 = new Scanner(System.in);
         Scanner input2 = new Scanner(System.in);
         String usernameInput = input1.nextLine();
@@ -26,7 +26,6 @@ public class Main {
         String checkPassword = ("{ CALL spCheckPassword(?, ?) }");
         String userFromDB = null;
         String pwdFromDB = null;
-
 
         try {
             callableStatement = con.prepareCall(findUser);
@@ -44,10 +43,7 @@ public class Main {
                     System.out.println("User not found");
                     break;
                 } //end while
-
-
             }
-
 
             try {
                 callableStatement = con.prepareCall(checkPassword);
@@ -63,19 +59,17 @@ public class Main {
                         System.out.println("NEJ");
                         break;
                     }
-
                 }
-
 
             } catch (SQLException ex) {
                 ex.printStackTrace();
                 ex.getCause();
             } //end catch
+
         } catch (SQLException ex) {
             ex.printStackTrace();
             ex.getCause();
-        }
-
+        } //end catch
     }
 }
 

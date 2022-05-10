@@ -30,7 +30,7 @@ public class ConnectionMYDB {
 
 }
 //try {
-//            callableStatement = conn.prepareCall(findUser);
+//            callableStatement = con.prepareCall(findUser);
 //            callableStatement.setString(1, usernameInput);
 //            rs = callableStatement.executeQuery();
 //
