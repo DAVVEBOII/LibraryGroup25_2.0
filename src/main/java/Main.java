@@ -7,6 +7,7 @@ public class Main {
         Statement stmt = null;
         ResultSet rs = null;
 
+
         con = ConnectionMYDB.getConnection();
         stmt=con.createStatement();
 
@@ -21,6 +22,25 @@ public class Main {
         String usernameInput = input1.nextLine();
         String findUser = "{ CALL spFindUser(?)}";
         String userFromDB = null;
+
+        try {
+        CallableStatement callableStatement = con.prepareCall(findUser);
+            callableStatement.setString(1, usernameInput);
+           rs = callableStatement.executeQuery();
+
+            while (rs.next()) {
+                userFromDB = rs.getString("username");
+            }
+            if (usernameInput.equals(userFromDB)) {
+                System.out.println("User found");
+           } else {
+                System.out.println("User not found");
+            } //end while
+        } //end try
+         catch(SQLException sqlException){
+            sqlException.printStackTrace();
+          sqlException.getCause();
+        } //end catch
     }
 }
 

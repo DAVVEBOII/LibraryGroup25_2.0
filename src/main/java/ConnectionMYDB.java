@@ -7,7 +7,7 @@ public class ConnectionMYDB {
   private static String password = "abcd1234";
   private static Connection con;
   private static Statement stmt;
-  private static String urlstring;
+
 
   public static Connection getConnection() {
 
