@@ -7,16 +7,8 @@ public class Main {
         Statement stmt = null;
         ResultSet rs = null;
         CallableStatement callableStatement = null;
-
         con = ConnectionMYDB.getConnection();
         stmt = con.createStatement();
-
-        //massa prints
-        System.out.println("Welcome to LTU Library");
-        System.out.println();
-
-        System.out.println("Please login");
-        System.out.println("Username");
 
         Scanner input1 = new Scanner(System.in);
         Scanner input2 = new Scanner(System.in);
@@ -26,6 +18,12 @@ public class Main {
         String checkPassword = ("{ CALL spCheckPassword(?, ?) }");
         String userFromDB = null;
         String pwdFromDB = null;
+
+        //prints vid startup
+        System.out.println("Welcome to LTU Library");
+        System.out.println();
+        System.out.println("Please login");
+        System.out.println("Username");
 
         try {
             callableStatement = con.prepareCall(findUser);
